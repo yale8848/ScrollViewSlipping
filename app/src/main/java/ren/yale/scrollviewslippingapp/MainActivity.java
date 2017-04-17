@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +15,31 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ren.yale.android.scrollviewslipping.ScrollOffsetListener;
+import ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout;
+
 public class MainActivity extends Activity {
+    private static final String TAG="scrollviewslippingapp";
     ListView mListView;
     private RecyclerView mRecyclerView;
     private TestAdapter mAdapter;
     private List<String> mDatas;
+
+    ScrollviewWrapperLayout mScrollviewWrapperLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mScrollviewWrapperLayout = (ScrollviewWrapperLayout) findViewById(R.id.scrollviewslip);
+
+        mScrollviewWrapperLayout.setScrollOffsetListener(new ScrollOffsetListener() {
+            @Override
+            public void onSlipping(int headOffset, int scrollOffset) {
+                Log.d(TAG,"headOffset = "+headOffset+" ; scrollOffset = "+scrollOffset);
+            }
+        });
         List<String> list = new ArrayList<>();
         for(int i = 0;i<100;i++){
             list.add(""+i);

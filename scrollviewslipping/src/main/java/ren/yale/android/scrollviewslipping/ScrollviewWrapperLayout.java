@@ -1,6 +1,7 @@
 package ren.yale.android.scrollviewslipping;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -40,17 +41,24 @@ public class ScrollviewWrapperLayout extends ViewGroup {
 
     private boolean mIsCanSlipDown = true;
 
+    private ScrollOffsetListener mScrollOffsetListener;
+
 
     public ScrollviewWrapperLayout(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public ScrollviewWrapperLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
+
     }
 
     public ScrollviewWrapperLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.ScrollViewSlip);
+        mIsCanSlipDown = ta.getBoolean(R.styleable.ScrollViewSlip_canSlipDown,false);
+        ta.recycle();
 
     }
 
@@ -70,6 +78,7 @@ public class ScrollviewWrapperLayout extends ViewGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
 
         mHeadView = getChildAt(0);
         mContentView = getChildAt(1);
@@ -99,9 +108,7 @@ public class ScrollviewWrapperLayout extends ViewGroup {
                 getMeasuredHeight() - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY);
 
         mScroolView.measure(scrollMeasureWidthSpec, scrollMeasureHeightSpec);
-        //mHeadView.measure(scrollMeasureWidthSpec, scrollMeasureHeightSpec);
         measureChild(mHeadView, scrollMeasureWidthSpec, scrollMeasureHeightSpec);
-        //measureChild(mContentView, scrollMeasureWidthSpec, scrollMeasureHeightSpec);
     }
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -232,6 +239,9 @@ public class ScrollviewWrapperLayout extends ViewGroup {
                 }
         }
         mContentView.offsetTopAndBottom(offset);
+        if (mScrollOffsetListener!=null){
+            mScrollOffsetListener.onSlipping(OFFSET, (int) mContentView.getY());
+        }
     }
     private void acquireVelocityTracker(final MotionEvent event) {
         if (null == mVelocityTracker) {
@@ -273,6 +283,10 @@ public class ScrollviewWrapperLayout extends ViewGroup {
                 mCanDragging = true;
             }
         }
+    }
+
+    public void setScrollOffsetListener(ScrollOffsetListener scrollOffsetListener){
+        mScrollOffsetListener = scrollOffsetListener;
     }
 
 }
