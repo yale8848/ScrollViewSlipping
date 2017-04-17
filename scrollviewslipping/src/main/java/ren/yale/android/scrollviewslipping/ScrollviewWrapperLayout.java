@@ -87,15 +87,6 @@ public class ScrollviewWrapperLayout extends ViewGroup {
 
         mMaxVelocity = vc.getScaledMaximumFlingVelocity();
         SLOT = vc.getScaledTouchSlop();
-        this.post(new Runnable() {
-            @Override
-            public void run() {
-
-                OFFSET = mHeadView.getMeasuredHeight();
-                mOffset = OFFSET;
-                requestLayout();
-            }
-        });
         mScroller = new Scroller(this.getContext());
 
     }
@@ -106,11 +97,16 @@ public class ScrollviewWrapperLayout extends ViewGroup {
                 getMeasuredWidth() - getPaddingLeft() - getPaddingRight(), MeasureSpec.EXACTLY);
         int scrollMeasureHeightSpec = MeasureSpec.makeMeasureSpec(
                 getMeasuredHeight() - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY);
-        //mScroolView.measure(scrollMeasureWidthSpec, scrollMeasureHeightSpec);
-        measureChildren(widthMeasureSpec, heightMeasureSpec);
+
+        mScroolView.measure(scrollMeasureWidthSpec, scrollMeasureHeightSpec);
+        //mHeadView.measure(scrollMeasureWidthSpec, scrollMeasureHeightSpec);
+        measureChild(mHeadView, scrollMeasureWidthSpec, scrollMeasureHeightSpec);
+        //measureChild(mContentView, scrollMeasureWidthSpec, scrollMeasureHeightSpec);
     }
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        OFFSET = mHeadView.getMeasuredHeight();
+        mOffset = OFFSET;
         mHeadView.layout(0,0,getMeasuredWidth(),mHeadView.getMeasuredHeight());
         mContentView.layout(0,OFFSET,getMeasuredWidth(),getMeasuredHeight()+OFFSET);
     }
