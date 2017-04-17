@@ -39,7 +39,7 @@ public class ScrollviewWrapperLayout extends ViewGroup {
     private View mScroolView;
 
 
-    private boolean mIsCanSlipDown = true;
+    private boolean mIsCanSlipDown = false;
 
     private ScrollOffsetListener mScrollOffsetListener;
 
