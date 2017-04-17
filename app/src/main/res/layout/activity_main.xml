@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ren.yale.scrollviewslippingapp.MainActivity">
+
+    <ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff0000"
+        android:paddingTop="30dp"
+        >
+        <ren.yale.android.scrollviewslipping.ScrollHeadView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="111"/>
+
+                <TextView
+                    android:layout_marginTop="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="111"/>
+
+                <TextView
+                    android:layout_marginTop="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="222"/>
+
+            </LinearLayout>
+        </ren.yale.android.scrollviewslipping.ScrollHeadView>
+
+        <ren.yale.android.scrollviewslipping.ScrollContentView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:divider="#ffff0000"
+                android:dividerHeight="10dp"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+<!--            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                >
+
+            </ListView>-->
+
+        </ren.yale.android.scrollviewslipping.ScrollContentView>
+
+    </ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout>
+
+
+</LinearLayout>
