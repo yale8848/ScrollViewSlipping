@@ -2,71 +2,51 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:scrollslip="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="ren.yale.scrollviewslippingapp.MainActivity">
 
-    <ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout
-        android:id="@+id/scrollviewslip"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        scrollslip:canSlipDown="true"
-        android:background="#ff0000"
-        >
-        <ren.yale.android.scrollviewslipping.ScrollHeadView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="#00ff00"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginTop="60dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:text="111"/>
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
 
-                <TextView
-                    android:layout_marginTop="60dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="111"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="listview"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"
+        />
 
-                <TextView
-                    android:layout_marginTop="60dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="222"/>
+    <Button
+        android:id="@+id/btn_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="recyclerview"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"
+        />
 
-            </LinearLayout>
-        </ren.yale.android.scrollviewslipping.ScrollHeadView>
 
-        <ren.yale.android.scrollviewslipping.ScrollContentView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:divider="#ffff0000"
-                android:dividerHeight="10dp"
-                android:background="#ffffff"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-<!--            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-                >
-
-            </ListView>-->
-
-        </ren.yale.android.scrollviewslipping.ScrollContentView>
-
-    </ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout>
-
+    <Button
+        android:id="@+id/btn_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="scrollview"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"
+        />
+    <Button
+        android:id="@+id/btn_webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="webview"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"
+        />
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package ren.yale.android.scrollviewslipping;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Scroller;
 
 /**
@@ -40,6 +42,8 @@ public class ScrollviewWrapperLayout extends ViewGroup {
 
 
     private boolean mIsCanSlipDown = false;
+    private boolean mIsReset = false;
+    private float mIsResetRatio = 0.3f;
 
     private ScrollOffsetListener mScrollOffsetListener;
 
@@ -50,7 +54,6 @@ public class ScrollviewWrapperLayout extends ViewGroup {
 
     public ScrollviewWrapperLayout(Context context, AttributeSet attrs) {
         this(context, attrs,0);
-
     }
 
     public ScrollviewWrapperLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -58,6 +61,8 @@ public class ScrollviewWrapperLayout extends ViewGroup {
 
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.ScrollViewSlip);
         mIsCanSlipDown = ta.getBoolean(R.styleable.ScrollViewSlip_canSlipDown,false);
+        mIsReset = ta.getBoolean(R.styleable.ScrollViewSlip_reset,false);
+        mIsResetRatio = ta.getFloat(R.styleable.ScrollViewSlip_resetRatio,0.3f);
         ta.recycle();
 
     }
@@ -66,7 +71,7 @@ public class ScrollviewWrapperLayout extends ViewGroup {
 
          for (int i=0;i<viewGroup.getChildCount();i++){
              View v = viewGroup.getChildAt(i);
-             if(v instanceof ListView || v instanceof RecyclerView || v instanceof WebView){
+             if(v instanceof ListView || v instanceof RecyclerView || v instanceof ScrollView||v instanceof WebView){
                  return v;
              }else if (v instanceof  ViewGroup){
                 return findScrollView((ViewGroup) v);
@@ -78,8 +83,6 @@ public class ScrollviewWrapperLayout extends ViewGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
-
         mHeadView = getChildAt(0);
         mContentView = getChildAt(1);
         if(mHeadView == null || mContentView==null ||
@@ -93,7 +96,6 @@ public class ScrollviewWrapperLayout extends ViewGroup {
         }
 
         final ViewConfiguration vc = ViewConfiguration.get(getContext());
-
         mMaxVelocity = vc.getScaledMaximumFlingVelocity();
         SLOT = vc.getScaledTouchSlop();
         mScroller = new Scroller(this.getContext());
@@ -136,6 +138,8 @@ public class ScrollviewWrapperLayout extends ViewGroup {
                    return recyclerView.getChildCount()>0&&(layoutManager.findFirstVisibleItemPosition()>0 || recyclerView.getChildAt(0).getTop()<
                    recyclerView.getPaddingTop());
             }
+        }else {
+            return ViewCompat.canScrollVertically(mScroolView, -1);
         }
         return false;
     }
@@ -185,7 +189,7 @@ public class ScrollviewWrapperLayout extends ViewGroup {
                     int d = (int) (ev.getY()-mStartY);
                     mOffset += d;
                     offsetTopAndBottomContentView(d);
-                    if (mOffset <= 0&&d<0){
+                    if (mContentView.getY() <= 0&&d<0){
                         int oldAction = ev.getAction();
                         ev.setAction(MotionEvent.ACTION_DOWN);
                         dispatchTouchEvent(ev);
@@ -198,13 +202,13 @@ public class ScrollviewWrapperLayout extends ViewGroup {
             }
             case MotionEvent.ACTION_UP:{
                 mStartY = (int) ev.getY();
-                if(mCanDragging){
+                if(mCanDragging&&mIsReset){
 
 
                     mVelocityTracker.computeCurrentVelocity(1, mMaxVelocity);
                     final float vy = mVelocityTracker.getYVelocity(mActivePointerId);
 
-                    if(mContentView.getY()>OFFSET/2){
+                    if(mContentView.getY()>mIsResetRatio*OFFSET){
                         int d = (int) (mContentView.getY()-OFFSET);
                         smoothScrollTo(-d, (int) vy);
                         mOffset = OFFSET;

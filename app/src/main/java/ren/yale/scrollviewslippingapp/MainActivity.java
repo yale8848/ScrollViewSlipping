@@ -1,104 +1,37 @@
 package ren.yale.scrollviewslippingapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import ren.yale.android.scrollviewslipping.ScrollOffsetListener;
-import ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout;
 
 public class MainActivity extends Activity {
-    private static final String TAG="scrollviewslippingapp";
-    ListView mListView;
-    private RecyclerView mRecyclerView;
-    private TestAdapter mAdapter;
-    private List<String> mDatas;
-
-    ScrollviewWrapperLayout mScrollviewWrapperLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        mScrollviewWrapperLayout = (ScrollviewWrapperLayout) findViewById(R.id.scrollviewslip);
-
-        mScrollviewWrapperLayout.setScrollOffsetListener(new ScrollOffsetListener() {
-            @Override
-            public void onSlipping(int headOffset, int scrollOffset) {
-                Log.d(TAG,"headOffset = "+headOffset+" ; scrollOffset = "+scrollOffset);
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_listview:{
+                startActivity(new Intent(MainActivity.this,ListViewActivity.class));
+                break;
             }
-        });
-        List<String> list = new ArrayList<>();
-        for(int i = 0;i<100;i++){
-            list.add(""+i);
-        }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
-
-       // mListView = (ListView) findViewById(R.id.listView);
-       // mListView.setAdapter(arrayAdapter);
-        initData();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mRecyclerView.setAdapter(mAdapter = new TestAdapter());
-    }
-
-
-    protected void initData()
-    {
-        mDatas = new ArrayList<String>();
-        for (int i = 'A'; i < 'z'; i++)
-        {
-            mDatas.add("" + (char) i);
-        }
-    }
-
-    class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder>
-    {
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                    MainActivity.this).inflate(R.layout.recycler_layout_item, parent,
-                    false));
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position)
-        {
-            holder.tv.setText(mDatas.get(position));
-        }
-
-        @Override
-        public int getItemCount()
-        {
-            return mDatas.size();
-        }
-
-        class MyViewHolder extends RecyclerView.ViewHolder
-        {
-
-            TextView tv;
-
-            public MyViewHolder(View view)
-            {
-                super(view);
-                tv = (TextView) view.findViewById(R.id.tv_recycler_item);
+            case R.id.btn_recycler:{
+                startActivity(new Intent(MainActivity.this,RecyclerActivity.class));
+                break;
+            }
+            case R.id.btn_scrollview:{
+                startActivity(new Intent(MainActivity.this,ScrollViewActivity.class));
+                break;
+            }
+            case R.id.btn_webview:{
+                startActivity(new Intent(MainActivity.this,WebViewActivity.class));
+                break;
             }
         }
     }
+
 }

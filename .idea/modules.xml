@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/ScrollViewSlipping.iml" filepath="$PROJECT_DIR$/ScrollViewSlipping.iml" />
       <module fileurl="file://$PROJECT_DIR$/ScrollViewSlippingApp.iml" filepath="$PROJECT_DIR$/ScrollViewSlippingApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/scrollviewslipping/scrollviewslipping.iml" filepath="$PROJECT_DIR$/scrollviewslipping/scrollviewslipping.iml" />
       <module fileurl="file://$PROJECT_DIR$/scrollviewslipping/scrollviewslipping.iml" filepath="$PROJECT_DIR$/scrollviewslipping/scrollviewslipping.iml" />
     </modules>
   </component>
