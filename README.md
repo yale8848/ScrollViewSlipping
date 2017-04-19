@@ -76,7 +76,7 @@
 
 ## 源码
 
-   源码我已经放在github，https://github.com/yale8848/ScrollViewSlipping.git
+   源码我已经放在github，https://github.com/yale8848/ScrollViewSlipping.git 并封装成库
 
 
 ## 使用步骤
