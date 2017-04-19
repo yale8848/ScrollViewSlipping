@@ -4,7 +4,7 @@
 
 有时候需要实现下面的功能，上面是图片，下面是ListView;
 
-![listview](https://solar.fbcontent.cn/s/3fccbb09-app-image.png)
+![listview](https://github.com/yale8848/ScrollViewSlipping/blob/master/preview/listview.gif?raw=true)
 
 
 ## 解决思路
