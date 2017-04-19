@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ren.yale.scrollviewslippingapp.ScrollViewActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+    </LinearLayout>
+
+    <ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout
+        android:id="@+id/scrollviewslip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+        <ren.yale.android.scrollviewslipping.ScrollHeadView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/head"/>
+        </ren.yale.android.scrollviewslipping.ScrollHeadView>
+
+        <ren.yale.android.scrollviewslipping.ScrollContentView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:text="text"
+                        android:layout_gravity="center"/>
+
+
+
+                </LinearLayout>
+            </ScrollView>
+
+        </ren.yale.android.scrollviewslipping.ScrollContentView>
+
+    </ren.yale.android.scrollviewslipping.ScrollviewWrapperLayout>
+
+</LinearLayout>
