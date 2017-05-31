@@ -31,6 +31,18 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this,WebViewActivity.class));
                 break;
             }
+            case R.id.btn_behavior_recycler:{
+                startActivity(new Intent(MainActivity.this,BehaviorRecyclerActivity.class));
+                break;
+            }
+            case R.id.btn_behavior_webview:{
+                startActivity(new Intent(MainActivity.this,BehaviorWebviewActivity.class));
+                break;
+            }
+            case R.id.btn_behavior_scrollview:{
+                startActivity(new Intent(MainActivity.this,BehaviorScrollViewActivity.class));
+                break;
+            }
         }
     }
 

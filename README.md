@@ -6,6 +6,216 @@
 
 ![listview](https://github.com/yale8848/ScrollViewSlipping/blob/master/preview/listview.gif?raw=true)
 
+## CoordinatorLayout.Behavior 实现方式
+
+### 布局
+
+1. RecyclerView
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scrollLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_launcher"
+                />
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="ren.yale.android.scrollviewslipping.Behavior.ScrollCommonBehavior"
+            app:startOffset="0dp"
+            app:endOffset="80dp"
+            >
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
+```
+2. ScrollView
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scrollLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_launcher"
+                />
+        </LinearLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/netview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:endOffset="80dp"
+            app:layout_behavior="ren.yale.android.scrollviewslipping.Behavior.ScrollCommonBehavior"
+            app:startOffset="0dp"
+
+            >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#aaa"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@mipmap/ic_launcher"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@mipmap/ic_launcher"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@mipmap/ic_launcher"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@mipmap/ic_launcher"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@mipmap/ic_launcher"/>
+                </LinearLayout>
+
+
+            </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
+
+
+```
+
+3. WebView
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/scrollLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_launcher"
+                />
+        </LinearLayout>
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/netview"
+            app:layout_behavior="ren.yale.android.scrollviewslipping.Behavior.ScrollCommonBehavior"
+            app:startOffset="0dp"
+            app:endOffset="80dp"
+            >
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></WebView>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
+
+```
+
+### code添加 Behavior
+
+```
+    private void addBehavior(View v){
+        CoordinatorLayout.LayoutParams headerLp = (CoordinatorLayout.LayoutParams) v
+                .getLayoutParams();
+        try {
+            headerLp.setBehavior(new ScrollCommonBehavior( Util.dp2px(this,80),Util.dp2px(this,500)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addBehaviorListener(View v){
+        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) v.getLayoutParams();
+        ScrollCommonBehavior scrollCommonBehavior = (ScrollCommonBehavior) lp.getBehavior();
+        scrollCommonBehavior.setScrollOffsetListener(new ScrollCommonBehavior.ScrollOffsetListener() {
+            @Override
+            public void scroll(int offset, float rate) {
+
+            }
+        });
+    }
+```
+
+## 拦截事件方式
 
 ## 解决思路
 
@@ -82,7 +292,7 @@
 ## 使用步骤
 1. 引入库
 
-   `compile 'ren.yale.android:scrollviewslipping:0.0.4'`
+   `compile 'ren.yale.android:scrollviewslipping:0.0.5'`
 
 2. 布局添加view
 

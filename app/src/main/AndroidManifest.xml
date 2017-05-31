@@ -3,6 +3,7 @@
           package="ren.yale.scrollviewslippingapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +25,18 @@
         <activity android:name=".ScrollViewActivity">
         </activity>
         <activity android:name=".WebViewActivity">
+        </activity>
+        <activity
+            android:name=".BehaviorRecyclerActivity"
+            android:label="@string/title_activity_behavior_recycler">
+        </activity>
+        <activity
+            android:name=".BehaviorWebviewActivity"
+            android:label="@string/title_activity_behavior_webview">
+        </activity>
+        <activity
+            android:name=".BehaviorScrollViewActivity"
+            android:label="@string/title_activity_behavior_scroll_view">
         </activity>
     </application>
 

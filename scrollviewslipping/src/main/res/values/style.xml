@@ -4,5 +4,7 @@
         <attr name="canSlipDown" format="boolean"/>
         <attr name="reset" format="boolean"/>
         <attr name="resetRatio" format="float"/>
+        <attr name="startOffset" format="dimension"/>
+        <attr name="endOffset" format="dimension"/>
     </declare-styleable>
 </resources>
